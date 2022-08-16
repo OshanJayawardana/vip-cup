@@ -1,5 +1,12 @@
 # vip-cup
 
+### Instructions to download training dataset
+
+File size - 3.02 GB
+
+* `115999` Synthetic images
+* `123322` Real Images
+
 Code snippet to download processed and compressed dataset
 
 ```python
