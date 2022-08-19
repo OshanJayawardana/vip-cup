@@ -70,7 +70,7 @@ if __name__ == '__main__':
         print("oa: {}; auc: {}; ap:{}".format(oa, roc_auc, ap))
 
         
-    csv_name = "/content + '/{}.csv'.format(model_name)"
+    csv_name = "/content + '/{}.csv".format(model_name)
     with open(csv_name, 'a') as f:
         csv_writer = csv.writer(f, delimiter=',')
         csv_writer.writerows(rows)
