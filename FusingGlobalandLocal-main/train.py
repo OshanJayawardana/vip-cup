@@ -76,22 +76,25 @@ if __name__ == '__main__':
         epoch_iter = 0
 
 
-        for i, data in enumerate(data_loader):
-            model.total_steps += 1
-            epoch_iter += opt.batch_size
+        try:
+            for i, data in enumerate(data_loader):
+                model.total_steps += 1
+                epoch_iter += opt.batch_size
 
-            model.set_input(data)
-            model.optimize_parameters()
-            #exit()
+                model.set_input(data)
+                model.optimize_parameters()
+                #exit()
 
-            if model.total_steps % opt.loss_freq == 0:
-                print("Train loss: {} at step: {}".format(model.loss, model.total_steps))
-                train_writer.add_scalar('loss', model.loss, model.total_steps)
+                if model.total_steps % opt.loss_freq == 0:
+                    print("Train loss: {} at step: {}".format(model.loss, model.total_steps))
+                    train_writer.add_scalar('loss', model.loss, model.total_steps)
 
-            if model.total_steps % opt.save_latest_freq == 0:
-                print('saving the latest model %s (epoch %d, model.total_steps %d)' %
-                      (opt.name, epoch, model.total_steps))
-                model.save_networks('latest')
+                if model.total_steps % opt.save_latest_freq == 0:
+                    print('saving the latest model %s (epoch %d, model.total_steps %d)' %
+                          (opt.name, epoch, model.total_steps))
+                    model.save_networks('latest')
+        except (IOError,ValueError) as e:
+            print('could not read the image, hence skipping it.')
 
 
         #if epoch % opt.save_epoch_freq == 0:
